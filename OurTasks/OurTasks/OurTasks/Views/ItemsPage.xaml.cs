@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace OurTasks
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace OurTasks.Views
 {
-    public partial class MainPage : TabbedPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ItemsPage : ContentPage
     {
-        public MainPage()
+        public ItemsPage()
         {
             InitializeComponent();
         }
