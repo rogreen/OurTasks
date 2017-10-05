@@ -1,5 +1,4 @@
-﻿using OurTasks.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,23 +13,7 @@ namespace OurTasks
         {
             InitializeComponent();
 
-            var mainPage = new TabbedPage();
-            var itemsPage = new NavigationPage(new ItemsPage()) { Title = "Items" };
-            var speakersPage = new NavigationPage(new SpeakersPage()) { Title = "Speakers" };
-            var aboutPage = new NavigationPage(new AboutPage()) { Title = "About" };
-
-            Device.OnPlatform(iOS: () => {
-                sessionsPage.Icon = "tab_feed.png";
-                speakersPage.Icon = "tab_person.png";
-                aboutPage.Icon = "tab_about.png";
-
-            });
-            mainPage.Children.Add(sessionsPage);
-            mainPage.Children.Add(speakersPage);
-            mainPage.Children.Add(aboutPage);
-
-
-            MainPage = mainPage;
+            MainPage = new NavigationPage(new ItemsPage());
         }
 
         protected override void OnStart()

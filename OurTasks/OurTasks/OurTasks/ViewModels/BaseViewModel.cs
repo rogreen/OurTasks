@@ -1,6 +1,4 @@
-﻿using OurTasks.Models;
-using OurTasks.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace OurTasks.ViewModels
+namespace OurTasks
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

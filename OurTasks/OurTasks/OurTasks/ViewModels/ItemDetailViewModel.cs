@@ -1,11 +1,10 @@
-﻿using OurTasks.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OurTasks.ViewModels
+namespace OurTasks
 {
     public class ItemDetailViewModel : BaseViewModel
     {
