@@ -8,17 +8,16 @@ namespace OurTasks
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<Item> Items { get; set; }
+        public ObservableRangeCollection<ToDoItem> Items { get; set; }
 
         public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel()
         {
             Title = "Tasks";
-            Items = new ObservableRangeCollection<Item>();
+            Items = new ObservableRangeCollection<ToDoItem>();
 
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
         }
         async Task ExecuteLoadItemsCommand()
         {
@@ -30,11 +29,7 @@ namespace OurTasks
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                //foreach (var item in items)
-                //{
-                //    Items.Add(item);
-                //}
+                var items = await App.DataStore.GetItemsAsync("NextWeek");
                 Items.ReplaceRange(items);
             }
             catch (Exception ex)

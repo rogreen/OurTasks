@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
+using System;
 using Xamarin.Forms;
 
 namespace OurTasks
 {
     public partial class App : Application
     {
+        public static AzureDataStore DataStore = AzureDataStore.DefaultManager;
+
         public App()
         {
             InitializeComponent();

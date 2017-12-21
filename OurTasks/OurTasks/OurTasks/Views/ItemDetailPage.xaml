@@ -2,36 +2,79 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OurTasks.ItemDetailPage">
-    
-    <StackLayout Spacing="20" 
+
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save"
+                     Clicked="OnSaveClicked" />
+        <ToolbarItem Text="Done"
+                     Clicked="OnDoneClicked" />
+    </ContentPage.ToolbarItems>-->
+
+    <StackLayout Spacing="20"
                  Padding="15">
-        <Label Text="{Binding Item.Text}"
-               LineBreakMode="NoWrap"
-               Style="{DynamicResource ListItemTextStyle}"
-               FontSize="16"/>
-        <Label Text="{Binding Item.Description}"
-               LineBreakMode="NoWrap"
-               Style="{DynamicResource ListItemDetailTextStyle}"
-               FontSize="13"/>
-        <Label Text="{Binding Item.Location}"
-               LineBreakMode="NoWrap"
-               Style="{DynamicResource ListItemDetailTextStyle}"
-               FontSize="13"/>
-        <Label Text="{Binding Item.AssignedTo}"
-               LineBreakMode="NoWrap"
-               Style="{DynamicResource ListItemDetailTextStyle}"
-               FontSize="13"/>
-        <StackLayout Orientation="Horizontal">
-            <Label Text="Due "
-                   LineBreakMode="NoWrap"
-                   Style="{DynamicResource ListItemDetailTextStyle}"
-                   FontSize="13"/>
-            <Label Text="{Binding Item.DueDate, StringFormat='{0:MMMM dd, yyyy}'}"
-                   LineBreakMode="NoWrap"
-                   Style="{DynamicResource ListItemDetailTextStyle}"
-                   Margin="5,0,0,0"
-                   FontSize="13"/>
-        </StackLayout>
+
+        <Label Text="Name" />
+        <Entry Text="{Binding Item.Text}" />
+
+        <!--<Label Text="Location"
+               FontSize="Medium" />
+        <Entry Text="{Binding Item.Location}"
+               FontSize="Small"/>-->
+        <Picker x:Name="LocationPicker" 
+                Title="Location" 
+                SelectedIndexChanged="OnLocationPickerSelectedIndexChanged">
+            <Picker.Items>
+                <x:String>Home</x:String>
+                <x:String>Work</x:String>
+                <x:String>Other</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <!--<Label Text="Assigned to"
+               FontSize="Medium" />
+        <Entry Text="{Binding Item.AssignedTo}"
+               FontSize="Small"/>-->
+        <Picker x:Name="PeoplePicker" 
+                Title="Assigned to" 
+                SelectedIndexChanged="OnPeoplePickerSelectedIndexChanged">
+            <Picker.Items>
+                <x:String>Robert</x:String>
+                <x:String>Colette</x:String>
+                <x:String>Nobody</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <Label Text="Due" />
+        <!--<Entry Text="{Binding Item.DueDate}"
+               FontSize="Small" />-->
+        <DatePicker HorizontalOptions="Start"
+                    Date="{Binding Item.DueDate}" />
+
+        <Picker x:Name="OccurrencePicker" 
+                Title="Occurs" 
+                ItemsSource="{Binding Occurrences}"
+                ItemDisplayBinding="{Binding Text}" 
+                SelectedIndexChanged="OnOccurrencePickerSelectedIndexChanged" />
+        <!--SelectedItem="{Binding Item.Occurrence}"/>-->
+            <!--<Picker.Items>
+                <x:String>Once</x:String>
+                <x:String>Daily</x:String>
+                <x:String>Weekly</x:String>
+                <x:String>TwiceMonthly</x:String>
+                <x:String>Monthly</x:String>
+                <x:String>Quarterly</x:String>
+                <x:String>TwiceYearly</x:String>
+                <x:String>Yearly</x:String>
+            </Picker.Items>-->
+        <!--</Picker>-->
+
+        <Button Text="Save"
+                Clicked="OnSaveClicked" />
+        <Button Text="Completed"
+                Clicked="OnCompletedClicked" />
+
+        <!--<Button Text="Speak"
+                Clicked="SpeakButton_Clicked" />-->
+
     </StackLayout>
-    
 </ContentPage>

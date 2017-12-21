@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace OurTasks
@@ -17,7 +18,7 @@ namespace OurTasks
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
+            var item = args.SelectedItem as ToDoItem;
             if (item == null)
             {
                 // the item was deselected
@@ -25,7 +26,8 @@ namespace OurTasks
             }
 
             // Navigate to the detail page
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await Navigation.PushAsync(new ItemDetailPage(
+                new ItemDetailViewModel(item)));
 
             // Manually deselect item
             ItemsListView.SelectedItem = null;
@@ -35,8 +37,23 @@ namespace OurTasks
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+            viewModel.LoadItemsCommand.Execute(null);
+        }
+
+        private async void OnAddClicked(Object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ItemDetailPage(
+                new ItemDetailViewModel(new ToDoItem()
+                {
+                    DueDate = DateTime.Today.AddDays(7)
+                }
+                )));
+        }
+
+        private void OnRefreshClicked(Object sender, EventArgs e)
+        {
+            viewModel = new ItemsViewModel();
+            viewModel.LoadItemsCommand.Execute(null);
         }
 
     }
