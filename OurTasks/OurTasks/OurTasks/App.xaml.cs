@@ -1,6 +1,4 @@
-﻿
-using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace OurTasks
 {
@@ -8,11 +6,32 @@ namespace OurTasks
     {
         public static AzureDataStore DataStore = AzureDataStore.DefaultManager;
 
+        public static string TasksFilter = "All";
+
+        public static NavigationPage NavigationPage { get; private set; }
+        private static RootPage RootPage;
+        public static bool MenuIsPresented
+        {
+            get
+            {
+                return RootPage.IsPresented;
+            }
+            set
+            {
+                RootPage.IsPresented = value;
+            }
+        }
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new ItemsPage());
+            var menuPage = new MenuPage();
+            NavigationPage = new NavigationPage(new ItemsPage());
+            RootPage = new RootPage();
+            RootPage.Master = menuPage;
+            RootPage.Detail = NavigationPage;
+            MainPage = RootPage;
         }
 
         protected override void OnStart()

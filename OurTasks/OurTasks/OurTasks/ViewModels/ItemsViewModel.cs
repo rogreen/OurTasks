@@ -29,7 +29,7 @@ namespace OurTasks
             try
             {
                 Items.Clear();
-                var items = await App.DataStore.GetItemsAsync("NextWeek");
+                var items = await App.DataStore.GetItemsAsync();
                 Items.ReplaceRange(items);
             }
             catch (Exception ex)
