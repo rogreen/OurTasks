@@ -6,11 +6,10 @@ namespace OurTasks
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : ContentPage
     {
+        public ListView ListView { get { return menuItemsListView; } }
+
         public MenuPage()
         {
-            BindingContext = new MenuViewModel();
-            Title = "Menu";
-
             InitializeComponent();
         }
     }

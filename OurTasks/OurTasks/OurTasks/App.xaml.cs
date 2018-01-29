@@ -6,32 +6,13 @@ namespace OurTasks
     {
         public static AzureDataStore DataStore = AzureDataStore.DefaultManager;
 
-        public static string TasksFilter = "All";
-
-        public static NavigationPage NavigationPage { get; private set; }
-        private static RootPage RootPage;
-        public static bool MenuIsPresented
-        {
-            get
-            {
-                return RootPage.IsPresented;
-            }
-            set
-            {
-                RootPage.IsPresented = value;
-            }
-        }
+        public static string TasksFilter = "Next7Days";
 
         public App()
         {
             InitializeComponent();
 
-            var menuPage = new MenuPage();
-            NavigationPage = new NavigationPage(new ItemsPage());
-            RootPage = new RootPage();
-            RootPage.Master = menuPage;
-            RootPage.Detail = NavigationPage;
-            MainPage = RootPage;
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
