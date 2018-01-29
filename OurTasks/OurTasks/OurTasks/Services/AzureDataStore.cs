@@ -81,7 +81,7 @@ namespace OurTasks
         }
 
         public async Task<ObservableCollection<ToDoItem>> GetItemsAsync(
-            string scope, bool syncItems = false)
+            bool syncItems = false)
         {
             try
             {
@@ -92,9 +92,17 @@ namespace OurTasks
                 }
 #endif
                 IEnumerable<ToDoItem> items;
-                switch (scope)
+                System.DateTime endDate = DateTime.Today;
+                switch (App.TasksFilter)
                 {
-                    case "NextWeek":
+                    case "Today":
+                        items = await itemTable
+                           .Where(itemItem => !itemItem.Completed &&
+                                  itemItem.DueDate == DateTime.Today)
+                           .OrderBy(item => item.DueDate)
+                           .ToEnumerableAsync();
+                        break;
+                    case "Next7Days":
                         items = await itemTable
                            .Where(itemItem => !itemItem.Completed &&
                                   itemItem.DueDate <= DateTime.Today.AddDays(7))
@@ -122,7 +130,6 @@ namespace OurTasks
                            .ToEnumerableAsync();
                         break;
                 }
-
                 return new ObservableCollection<ToDoItem>(items);
             }
             catch (MobileServiceInvalidOperationException msioe)

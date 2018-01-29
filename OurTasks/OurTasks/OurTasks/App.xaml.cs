@@ -1,6 +1,4 @@
-﻿
-using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace OurTasks
 {
@@ -8,11 +6,13 @@ namespace OurTasks
     {
         public static AzureDataStore DataStore = AzureDataStore.DefaultManager;
 
+        public static string TasksFilter = "Next7Days";
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new ItemsPage());
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
